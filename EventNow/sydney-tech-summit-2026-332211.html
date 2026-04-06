@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Sydney Tech Summit 2026 Details Page - View event information, session calendar, comments section, and registration features.">
+  <title>Sydney Tech Summit 2026 | EventNow</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <!-- FullCalendar CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+  <style>
+    .event-hero {
+      background: linear-gradient(135deg, #0d6efd 0%, #084298 100%);
+      border-radius: 0.5rem;
+    }
+    .session-calendar {
+      background-color: #f8f9fa;
+      border-radius: 0.5rem;
+    }
+    .comment-unread {
+      background-color: #e7f1ff;
+      border-left: 4px solid #0d6efd;
+    }
+    .comment-read {
+      background-color: #f8f9fa;
+      border-left: 4px solid #6c757d;
+    }
+    .session-booked {
+      background-color: rgba(25, 135, 84, 0.2) !important;
+      border: 2px solid #198754 !important;
+    }
+    .promo-image {
+      max-height: 400px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg bg-light mb-4">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="index.html">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Flag_of_Australia_%28converted%29.svg" height="24" class="me-2" alt="AU Flag">
+        EventNow
+      </a>
+      <div class="d-flex align-items-center">
+        <span class="me-3 text-muted">
+          <i class="bi bi-person-check"></i> Logged in as Participant
+        </span>
+        <a href="index.html" class="btn btn-outline-secondary me-2">
+          <i class="bi bi-house"></i> Home
+        </a>
+        <a href="#" class="btn btn-outline-primary">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container mb-5">
+    <!-- Event Hero Section -->
+    <div class="event-hero text-white p-5 mb-4">
+      <div class="row align-items-center">
+        <div class="col-md-8">
+          <h1 class="display-4 fw-bold">Sydney Tech Summit 2026</h1>
+          <div class="mb-3">
+            <span class="badge bg-info text-dark me-2">Technology</span>
+            <span class="badge bg-warning text-dark me-2">Startups</span>
+            <span class="badge bg-success me-2">AI</span>
+            <span class="badge bg-primary me-2">Public Event</span>
+          </div>
+          <p class="lead mb-0">
+            <i class="bi bi-geo-alt"></i> ICC Sydney · 
+            <i class="bi bi-calendar ms-2"></i> 15-17 Nov 2026
+          </p>
+        </div>
+        <div class="col-md-4 text-center">
+          <div class="card bg-white text-dark">
+            <div class="card-body">
+              <h5 class="card-title">Event ID: 332211</h5>
+              <p class="card-text small">sydney-tech-summit-2026-332211</p>
+              <button class="btn btn-outline-primary w-100">
+                <i class="bi bi-share"></i> Share Event
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Event Details & Registration -->
+    <div class="row">
+      <!-- Left Column: Event Details & Session Calendar -->
+      <div class="col-lg-8">
+        <!-- Event Description -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">About This Event</h3>
+            <p class="card-text">
+              The Sydney Tech Summit 2026 is Australia's premier technology conference, bringing together industry leaders, 
+              innovators, and entrepreneurs to explore the latest trends in artificial intelligence, startup ecosystems, 
+              and emerging technologies. This three-day event features keynote presentations, interactive workshops, 
+              networking sessions, and product demonstrations from leading tech companies.
+            </p>
+            <div class="row mt-4">
+              <div class="col-md-6">
+                <p><i class="bi bi-clock text-primary"></i> <strong>Duration:</strong> 3 days (9:00 AM - 6:00 PM daily)</p>
+                <p><i class="bi bi-people text-primary"></i> <strong>Capacity:</strong> 1,200 attendees</p>
+              </div>
+              <div class="col-md-6">
+                <p><i class="bi bi-currency-dollar text-primary"></i> <strong>Entry Fee:</strong> Free for public</p>
+                <p><i class="bi bi-award text-primary"></i> <strong>Certification:</strong> Available upon completion</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Session Calendar -->
+        <div class="card mb-4 session-calendar">
+          <div class="card-body">
+            <h3 class="card-title mb-4">Session Calendar</h3>
+            <div class="alert alert-info">
+              <i class="bi bi-info-circle me-2"></i>
+              Click on available sessions to register. Booked sessions are highlighted in green.
+            </div>
+            <div id="calendar"></div>
+            <div class="mt-3">
+              <button class="btn btn-success" onclick="registerForSession()">
+                <i class="bi bi-calendar-plus"></i> Register for Selected Session
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latest Announcements -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title d-flex justify-content-between align-items-center">
+              Latest Announcements
+              <button class="btn btn-sm btn-outline-primary" onclick="toggleAnnouncements()">
+                Expand <i class="bi bi-chevron-down"></i>
+              </button>
+            </h3>
+            <div id="announcementsList">
+              <div class="alert alert-primary comment-unread mb-2">
+                <strong>New Speaker Added!</strong> Elon Musk will be giving a keynote on AI safety.
+                <span class="text-muted small float-end">2 hours ago</span>
+              </div>
+              <div class="alert alert-primary comment-unread mb-2">
+                <strong>Venue Update:</strong> Main hall changed to Convention Hall B.
+                <span class="text-muted small float-end">5 hours ago</span>
+              </div>
+              <div class="alert alert-secondary comment-read mb-2">
+                <strong>Registration Reminder:</strong> Early bird ends tomorrow.
+                <span class="text-muted small float-end">1 day ago</span>
+              </div>
+              <div class="alert alert-secondary comment-read mb-2">
+                <strong>COVID Guidelines:</strong> Masks recommended in indoor sessions.
+                <span class="text-muted small float-end">2 days ago</span>
+              </div>
+              <div class="alert alert-secondary comment-read mb-2">
+                <strong>Welcome Message:</strong> Welcome to Sydney Tech Summit 2026!
+                <span class="text-muted small float-end">3 days ago</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Promotion & Comments -->
+      <div class="col-lg-4">
+        <!-- Promotion Image -->
+        <div class="card mb-4">
+          <img src="https://images.unsplash.com/photo-1535223289827-42f1e9919769?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+               class="card-img-top promo-image" alt="Tech Conference">
+          <div class="card-body">
+            <p class="card-text small text-muted">
+              <i class="bi bi-camera"></i> Official promotional image for Sydney Tech Summit 2026
+            </p>
+          </div>
+        </div>
+
+        <!-- Participant Comments -->
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title mb-4">Participant Comments</h3>
+            
+            <!-- Comment 1 -->
+            <div class="mb-4">
+              <div class="d-flex mb-2">
+                <div class="flex-shrink-0">
+                  <i class="bi bi-person-circle fs-4"></i>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0">Chou</h6>
+                  <small class="text-muted">2 days ago</small>
+                  <p class="mt-1 mb-1">"I attended this event last August and it was fantastic! The AI workshops were particularly insightful."</p>
+                  <div class="d-flex align-items-center mt-2">
+                    <button class="btn btn-sm btn-outline-primary me-2">
+                      <i class="bi bi-hand-thumbs-up"></i> 12
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-reply"></i> Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comment 2 with Reply -->
+            <div class="mb-4">
+              <div class="d-flex mb-2">
+                <div class="flex-shrink-0">
+                  <i class="bi bi-person-circle fs-4"></i>
+                </div>
+                <div class="flex-grow-1 ms-3">
+                  <h6 class="mb-0">Anna</h6>
+                  <small class="text-muted">1 day ago</small>
+                  <p class="mt-1 mb-1">"Is this event suitable for bringing children?"</p>
+                  
+                  <!-- Reply to Anna's comment -->
+                  <div class="mt-3 ps-3 border-start border-2">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0">
+                        <i class="bi bi-person-circle text-success"></i>
+                      </div>
+                      <div class="flex-grow-1 ms-3">
+                        <h6 class="mb-0 text-success">Event Organiser <span class="badge bg-success">Official</span></h6>
+                        <small class="text-muted">12 hours ago</small>
+                        <p class="mt-1 mb-1">"Yes, we have a family-friendly zone and activities for children aged 5+."</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="d-flex align-items-center mt-2">
+                    <button class="btn btn-sm btn-outline-primary me-2">
+                      <i class="bi bi-hand-thumbs-up"></i> 8
+                    </button>
+                    <button class="btn btn-sm btn-outline-secondary">
+                      <i class="bi bi-reply"></i> Reply
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- New Comment Form -->
+            <div class="mt-4">
+              <h6>Add Your Comment</h6>
+              <textarea class="form-control mb-2" rows="3" placeholder="Share your thoughts about this event..."></textarea>
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-outline-secondary">
+                  <i class="bi bi-image"></i> Add Image
+                </button>
+                <button class="btn btn-primary">
+                  <i class="bi bi-send"></i> Post Comment
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-title">Event Statistics</h6>
+            <div class="row text-center">
+              <div class="col-4">
+                <h4 class="text-primary">850</h4>
+                <small class="text-muted">Registered</small>
+              </div>
+              <div class="col-4">
+                <h4 class="text-success">24</h4>
+                <small class="text-muted">Sessions</small>
+              </div>
+              <div class="col-4">
+                <h4 class="text-warning">48</h4>
+                <small class="text-muted">Comments</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-light py-4 mt-5">
+    <div class="container text-center text-muted">
+      <p>© 2026 EventNow Australia | ABN 12 345 678 901</p>
+      <div class="small">
+        <a href="#" class="text-decoration-none me-3">Terms of Service</a>
+        <a href="#" class="text-decoration-none me-3">Privacy Policy</a>
+        <a href="#" class="text-decoration-none">Contact Us</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+
+  <!-- Custom Scripts -->
+  <script>
+    // Calendar Initialization
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        initialDate: '2026-11-15',
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay'
+        },
+        events: [
+          {
+            title: 'AI Keynote Session',
+            start: '2026-11-15T09:00:00',
+            end: '2026-11-15T11:00:00',
+            backgroundColor: '#0d6efd',
+            borderColor: '#0d6efd',
+            className: 'available-session'
+          },
+          {
+            title: 'Startup Pitch Competition',
+            start: '2026-11-15T13:00:00',
+            end: '2026-11-15T15:00:00',
+            backgroundColor: '#198754',
+            borderColor: '#198754',
+            className: 'session-booked'
+          },
+          {
+            title: 'Machine Learning Workshop',
+            start: '2026-11-16T10:00:00',
+            end: '2026-11-16T12:00:00',
+            backgroundColor: '#0d6efd',
+            borderColor: '#0d6efd',
+            className: 'available-session'
+          },
+          {
+            title: 'Networking Reception',
+            start: '2026-11-16T17:00:00',
+            end: '2026-11-16T19:00:00',
+            backgroundColor: '#0d6efd',
+            borderColor: '#0d6efd',
+            className: 'available-session'
+          },
+          {
+            title: 'Future Tech Panel',
+            start: '2026-11-17T14:00:00',
+            end: '2026-11-17T16:00:00',
+            backgroundColor: '#0d6efd',
+            borderColor: '#0d6efd',
+            className: 'available-session'
+          }
+        ],
+        eventClick: function(info) {
+          if (info.event.classNames.includes('available-session')) {
+            if (confirm('Register for "' + info.event.title + '"?')) {
+              info.event.setProp('backgroundColor', '#198754');
+              info.event.setProp('borderColor', '#198754');
+              info.event.setProp('classNames', ['session-booked']);
+              alert('Successfully registered for ' + info.event.title);
+            }
+          } else if (info.event.classNames.includes('session-booked')) {
+            alert('You are already registered for this session');
+          }
+        }
+      });
+      calendar.render();
+    });
+
+    // Toggle announcements
+    function toggleAnnouncements() {
+      const announcements = document.getElementById('announcementsList');
+      const button = document.querySelector('.btn-outline-primary');
+      
+      if (announcements.style.maxHeight && announcements.style.maxHeight !== '0px') {
+        announcements.style.maxHeight = '0px';
+        button.innerHTML = 'Expand <i class="bi bi-chevron-down"></i>';
+      } else {
+        announcements.style.maxHeight = announcements.scrollHeight + 'px';
+        button.innerHTML = 'Collapse <i class="bi bi-chevron-up"></i>';
+      }
+    }
+
+    // Register for session
+    function registerForSession() {
+      alert('Please click on an available session in the calendar to register.');
+    }
+
+    // Set initial announcements height
+    document.addEventListener('DOMContentLoaded', function() {
+      const announcements = document.getElementById('announcementsList');
+      announcements.style.maxHeight = '200px';
+      announcements.style.overflow = 'hidden';
+      announcements.style.transition = 'max-height 0.3s ease';
+    });
+  </script>
+</body>
+</html>
